@@ -1,1 +1,25 @@
-test bsuttor
+<div metal:define-macro="portal_footer"
+    i18n:domain="plone"
+    class="row">
+  <div class="cell width-full position-0">
+
+    <div id="portal-footer">
+      <div tal:repeat='folder view/get_site_map' class='footer-column'>
+        <a tal:attributes="href folder/url"><p tal:content="folder/title"></p></a>
+        
+        <ul tal:condition='folder/content'>
+          <li tal:repeat='subfolder folder/content' class='bodytt'>
+            <a tal:attributes="href subfolder/url"><p tal:content="subfolder/title"></p></a>
+            
+            <ul tal:condition='subfolder/content'>
+              <li tal:repeat='subsubfolder subfolder/content'>
+                <a tal:attributes="href subsubfolder/url"><p tal:content="subsubfolder/title"></p></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+  </div>
+
+</div>
+</div>

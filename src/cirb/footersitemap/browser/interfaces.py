@@ -1,9 +1,12 @@
 from plone.theme.interfaces import IDefaultPloneLayer
+import zope.interface
 
 
-class IThemeSpecific(IDefaultPloneLayer):
-    """Marker interface that defines a Zope 3 browser layer.
-       If you need to register a viewlet only for the
-       "Urbis Map" theme, this interface must be its layer
-       (in urbis/viewlets/configure.zcml).
+class IFooterSitemap(zope.interface.Interface):
+    """A layer specific for this add-on product.
+
+    This interface is referred in browserlayers.xml.
+
+    All views and viewlets register against this layer will appear on your Plone site
+    only when the add-on installer has been run.
     """

@@ -1,0 +1,6 @@
+<layers>
+    <layer
+        name="cirb.footersitemap.layer"
+        interface="cirb.footersitemap.browser.interfaces.IFooterSitemap"
+        />
+</layers>

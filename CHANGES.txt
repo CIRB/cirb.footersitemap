@@ -4,5 +4,6 @@ Changelog
 1.0dev (unreleased)
 -------------------
 
+- Folder which are exclude_from_nav are no more view
 - Package created using zopeskel
   []

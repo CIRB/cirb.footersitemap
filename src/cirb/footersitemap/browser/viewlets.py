@@ -1,6 +1,7 @@
 from plone.app.layout.viewlets.common import FooterViewlet
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
+from plone.app.layout.navigation.root import getNavigationRootObject
 
 class FooterSitemapViewlet(FooterViewlet):
 
@@ -20,7 +21,8 @@ class FooterSitemapViewlet(FooterViewlet):
 
     def get_site_map(self):
         folders=[]
-        base_path = '/'.join(self.portal.getPhysicalPath())
+        root = getNavigationRootObject(self.context, self.portal)
+        base_path = '/'.join(root.getPhysicalPath())
         return self.get_three_level_folder(base_path)
 
 

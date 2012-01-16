@@ -60,7 +60,6 @@ class FooterSitemapViewlet(FooterViewlet):
     
 def get_document(root, doc_id):
     text = root.get(doc_id).getText()
-    import pdb; pdb.set_trace()
     return text
     
 def to_html(folders):

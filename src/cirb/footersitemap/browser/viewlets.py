@@ -21,10 +21,16 @@ class FooterSitemapViewlet(FooterViewlet):
     
     def get_footer(self):
         root = getNavigationRootObject(self.context, self.portal)
-        doc_ids = ['footer', 'footer-%s' % self.context.Language()]
+        #lang = self.context.Language()
+        lang = getToolByName(self.context, 'portal_languages').getPreferredLanguage()
+        print "Langage : %s" % lang
+        if not lang:
+            lang = 'fr'
+        doc_ids = ['footer', 'footer-%s' % lang]
+        
         for doc_id in doc_ids:
             if doc_id in root.contentIds():
-                return get_document(root, doc_id)        
+                return get_document(root, doc_id)
         base_path = '/'.join(root.getPhysicalPath())
         return self.get_site_map()        
 

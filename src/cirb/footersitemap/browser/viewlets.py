@@ -18,13 +18,21 @@ class FooterSitemapViewlet(FooterViewlet):
     @property
     def portal(self):
         return getToolByName(self.context, 'portal_url').getPortalObject()
+    
+    def get_footer(self):
+        root = getNavigationRootObject(self.context, self.portal)
+        doc_ids = ['footer', 'footer-%s' % self.context.Language()]
+        for doc_id in doc_ids:
+            if doc_id in root.contentIds():
+                return get_document(root, doc_id)        
+        base_path = '/'.join(root.getPhysicalPath())
+        return self.get_site_map()        
 
     def get_site_map(self):
-        folders=[]
         root = getNavigationRootObject(self.context, self.portal)
         base_path = '/'.join(root.getPhysicalPath())
-        return self.get_three_level_folder(base_path)
-
+        three_level_fodler = self.get_three_level_folder(base_path)
+        return to_html(three_level_fodler)
 
     def get_three_level_folder(self, folder_path):
         results=[]
@@ -45,5 +53,31 @@ class FooterSitemapViewlet(FooterViewlet):
         for folder in folders:
             obj = folder.getObject()
             if not obj.exclude_from_nav():
-                results.append({'title':obj.Title(),'url':obj.absolute_url(), 'content':[], 'physical_path':obj.getPhysicalPath()})
+                results.append({'title':obj.Title(),'url':obj.absolute_url(), 
+                                'content':[], 'physical_path':obj.getPhysicalPath()})
         return results
+    
+    
+def get_document(root, doc_id):
+    text = root.get(doc_id).getText()
+    import pdb; pdb.set_trace()
+    return text
+    
+def to_html(folders):
+    html = ''
+    for folder in folders:
+        html += '<div class="footer-column">'
+        html += dossier_to_html(folder)
+        html += '</div>'
+    return html
+    
+def dossier_to_html(folder):
+    html = '<a href="%s"><p>%s</p></a>' % (folder.get("url"), folder.get("title"))
+    if folder.get("content"):
+        html += '<ul>'
+        for sub_folder in folder.get("content"):
+            html += '<li>'
+            html += dossier_to_html(sub_folder)
+            html += '</li>'
+        html += '</ul>'    
+    return html

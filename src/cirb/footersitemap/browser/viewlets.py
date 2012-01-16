@@ -23,10 +23,8 @@ class FooterSitemapViewlet(FooterViewlet):
         root = getNavigationRootObject(self.context, self.portal)
         #lang = self.context.Language()
         lang = getToolByName(self.context, 'portal_languages').getPreferredLanguage()
-        print "Langage : %s" % lang
-        if not lang:
-            lang = 'fr'
-        doc_ids = ['footer', 'footer-%s' % lang]
+        #print "Langage : %s" % lang
+        doc_ids = ['footer-%s' % lang, 'footer']
         
         for doc_id in doc_ids:
             if doc_id in root.contentIds():

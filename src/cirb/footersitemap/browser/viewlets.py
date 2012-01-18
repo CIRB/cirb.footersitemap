@@ -49,7 +49,7 @@ class FooterSitemapViewlet(FooterViewlet):
         return results
 
     def get_folders(self,folder_path):
-        folders = self.portal_catalog.searchResults(portal_type='Folder', 
+        folders = self.portal_catalog.searchResults(portal_type=('Folder','Document'), 
                                                     review_state = "published", 
                                                     path={'query': folder_path, 'depth': 1},
                                                     sort_on='getObjPositionInParent')

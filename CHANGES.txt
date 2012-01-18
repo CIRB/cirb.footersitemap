@@ -4,6 +4,7 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Documents are not visible on footer, not only folder
 - View a Document instead of the footer if a document called 'footer-lang' exists on the navigation root of the site. 
 Exemple of ids of document  : footer-fr, footer-en, footer-nl.
 

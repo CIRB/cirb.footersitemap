@@ -67,11 +67,12 @@ def get_document(root, doc_id):
     return text
     
 def to_html(folders):
-    html = ''
+    html = '<ul>'
     for folder in folders:
-        html += '<div class="footer-column">'
+        html += '<li class="footer-column">'
         html += dossier_to_html(folder)
-        html += '</div>'
+        html += '</li>'
+    html += '</ul>'
     return html
     
 def dossier_to_html(folder):

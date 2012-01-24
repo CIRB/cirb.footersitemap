@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 (unreleased)
+1.1 (2012-01-24)
 ----------------
 
 - Documents are now visible on footer, not only folder

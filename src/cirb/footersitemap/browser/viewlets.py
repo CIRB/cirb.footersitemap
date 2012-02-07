@@ -57,7 +57,7 @@ class FooterSitemapViewlet(FooterViewlet):
         for folder in folders:
             obj = folder.getObject()
             if not obj.exclude_from_nav():
-                results.append({'title':obj.Title(),'url':obj.absolute_url(), 
+                results.append({'title':obj.Title(),'url':obj.absolute_url(), 'id':obj.getId(),
                                 'content':[], 'physical_path':obj.getPhysicalPath()})
         return results
     
@@ -76,7 +76,7 @@ def to_html(folders):
     return html
     
 def dossier_to_html(folder):
-    html = '<a href="%s"><p>%s</p></a>' % (folder.get("url"), folder.get("title"))
+    html = '<a href="%s" class="%s"><p>%s</p></a>' % (folder.get("url"), folder.get('id'), folder.get("title"))
     if folder.get("content"):
         html += '<ul>'
         for sub_folder in folder.get("content"):

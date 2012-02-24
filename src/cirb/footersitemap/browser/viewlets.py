@@ -29,7 +29,6 @@ class FooterSitemapViewlet(FooterViewlet):
         for doc_id in doc_ids:
             if doc_id in root.contentIds():
                 return get_document(root, doc_id)
-        base_path = '/'.join(root.getPhysicalPath())
         return self.get_site_map()        
 
     def get_site_map(self):

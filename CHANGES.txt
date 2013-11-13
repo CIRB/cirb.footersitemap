@@ -4,7 +4,8 @@ Changelog
 1.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- PyLint
+  [bsuttor]
 
 
 1.6.1 (2012-02-24)

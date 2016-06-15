@@ -45,11 +45,9 @@ class FooterSitemapViewlet(FooterViewlet):
         results = []
         folders = self.get_folders(folder_path)
         for folder in folders:
-            folder['content'] = self.get_folders(
-                                             '/'.join(folder['physical_path']))
+            folder['content'] = self.get_folders(folder['path'])
             for subfolder in folder['content']:
-                subfolder['content'] = self.get_folders(
-                                          '/'.join(subfolder['physical_path']))
+                subfolder['content'] = self.get_folders(folder['path'])
             results.append(folder)
         return results
 
@@ -60,13 +58,12 @@ class FooterSitemapViewlet(FooterViewlet):
                             sort_on='getObjPositionInParent')
         results = []
         for folder in folders:
-            obj = folder.getObject()
-            if not obj.exclude_from_nav():
-                results.append({'title': obj.Title(),
-                                'url': obj.absolute_url(),
-                                'id': obj.getId(),
+            if not folder.exclude_from_nav:
+                results.append({'title': folder.Title,
+                                'url': folder.getURL(),
+                                'id': folder.id,
                                 'content': [],
-                                'physical_path': obj.getPhysicalPath()})
+                                'path': folder.getPath()})
         return results
 
 

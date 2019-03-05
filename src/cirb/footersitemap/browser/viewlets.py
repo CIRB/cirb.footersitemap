@@ -2,6 +2,7 @@
 from plone.app.layout.viewlets.common import FooterViewlet
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
+from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.layout.navigation.root import getNavigationRootObject
 
 
@@ -30,9 +31,15 @@ class FooterSitemapViewlet(FooterViewlet):
         #print "Langage : %s" % lang
         doc_ids = ['footer-%s' % lang, 'footer']
 
+        lrf = getattr(root, lang, None)
+        if not INavigationRoot.providedBy(lrf):
+            lrf = None
+
         for doc_id in doc_ids:
             if doc_id in root.contentIds():
                 return get_document(root, doc_id)
+            elif lrf and doc_id in lrf.contentIds():
+                return get_document(lrf, doc_id)
         return self.get_site_map()
 
     def get_site_map(self):

@@ -4,7 +4,9 @@ Changelog
 1.6.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Try to get footer from Language Root Folder if any
+  This fixes footer document retrieval on root (ex: @@search)
+  [laulaz]
 
 
 1.6.4 (2016-06-29)
